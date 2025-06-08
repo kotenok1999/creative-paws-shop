@@ -12,7 +12,7 @@ const AdminPanel = () => {
     const fetchOrders = useCallback(async () => {
         const token = localStorage.getItem('token');
         try {
-            const response = await fetch('http://localhost:5001/api/admin/orders', {
+            const response = await fetch('https://creative-paws-shop-production.up.railway.app/api/admin/orders', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!response.ok) throw new Error('Доступ запрещен');
@@ -32,7 +32,7 @@ const AdminPanel = () => {
     const handleStatusChange = async (orderId, newStatus) => {
         const token = localStorage.getItem('token');
         try {
-            await fetch(`http://localhost:5001/api/admin/orders/${orderId}`, {
+            await fetch(`https://creative-paws-shop-production.up.railway.app/api/admin/orders/${orderId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -25,11 +25,11 @@ const Profile = () => {
                 // 2. Отправляем два запроса одновременно, чтобы было быстрее
                 const [profileResponse, ordersResponse] = await Promise.all([
                     // Запрос на данные профиля
-                    fetch('http://localhost:5001/api/profile', {
+                    fetch('https://creative-paws-shop-production.up.railway.app/api/profile', {
                         headers: { 'Authorization': `Bearer ${token}` }
                     }),
                     // Запрос на историю заказов
-                    fetch('http://localhost:5001/api/orders', {
+                    fetch('https://creative-paws-shop-production.up.railway.app/api/orders', {
                         headers: { 'Authorization': `Bearer ${token}` }
                     })
                 ]);

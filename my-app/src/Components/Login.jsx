@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       // 1. Отправляем запрос на наш сервер
-      const response = await fetch('http://localhost:5001/api/auth/login', {
+      const response = await fetch('https://creative-paws-shop-production.up.railway.app/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

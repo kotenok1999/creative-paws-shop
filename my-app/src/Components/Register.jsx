@@ -21,7 +21,7 @@ const Register = () => {
 
     try {
       // 1. Отправляем запрос на наш сервер
-      const response = await fetch('http://localhost:5001/api/auth/register', {
+      const response = await fetch('https://creative-paws-shop-production.up.railway.app/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
