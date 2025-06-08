@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "CompactaBlack";
+    src: url("../public/fonts/CompactaBlack.ttf");
+}
+@font-face {
+    font-family: "Bellota";
+    src: url("..//public/fonts/Bellota/Bellota-Bold.ttf");
+}
+
+@font-face {
+    font-family: "Benzin";
+    src: url("../public/fonts/benzin-medium.otf");
+}
+
