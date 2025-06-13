@@ -22,5 +22,5 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-// Экспортируем модель, чтобы использовать ее в других файлах
+
 module.exports = mongoose.model('User', UserSchema);

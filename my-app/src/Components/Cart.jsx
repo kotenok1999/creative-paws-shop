@@ -1,5 +1,3 @@
-// Файл: my-app/src/Components/Cart.jsx - НОВАЯ ВЕРСИЯ
-
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import Header from './Header/Header';
@@ -11,10 +9,9 @@ const Cart = () => {
   const navigate = useNavigate();
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // === НАША НОВАЯ ФУНКЦИЯ ДЛЯ ПЕРЕХОДА К ОФОРМЛЕНИЮ ===
+  // === ФУНКЦИЯ ДЛЯ ПЕРЕХОДА К ОФОРМЛЕНИЮ ===
   const handleProceedToCheckout = () => {
-    // Очищаем корзину только после успешного оформления на следующей странице
-    // clearCart(); 
+    
     navigate('/checkout', { state: { cartItems, total } });
   };
 
@@ -60,7 +57,7 @@ const Cart = () => {
 
             <div className="mt-8 pt-6 border-t-2 border-gray-300 flex flex-col items-end">
               <div className="text-right text-3xl font-bold mb-4">Итого: {total} РУБ.</div>
-              {/* НАША ОБНОВЛЕННАЯ КНОПКА */}
+              
               <button onClick={handleProceedToCheckout} className="bg-darkbluegray text-white text-xl py-3 px-10 rounded hover:bg-wisteria transition-colors">
                 Перейти к оформлению
               </button>

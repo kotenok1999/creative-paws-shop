@@ -1,5 +1,3 @@
-// Файл: my-app/src/Components/ProductDetail.jsx - ПОЛНАЯ ВЕРСИЯ БЕЗ СЕРДЕЧКА
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from './Header/Header';
@@ -63,7 +61,7 @@ const ProductDetail = () => {
               </h1>
               <h2 className="text-3xl font-Benzin text-black mb-6 font-bold">{product.price} РУБ.</h2>
 
-              {/* Осталась только одна кнопка */}
+              
               <div className='flex items-center space-x-4'>
                 <button
                   onClick={() => addToCart(product)}

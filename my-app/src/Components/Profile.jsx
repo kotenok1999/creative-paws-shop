@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header/Header';
@@ -10,7 +9,7 @@ const Profile = () => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Этот useEffect сработает один раз при загрузке страницы
+    
     useEffect(() => {
         const fetchProfileData = async () => {
             // 1. Берем "пропуск" (токен) из "кармана" (localStorage)
@@ -22,14 +21,15 @@ const Profile = () => {
             }
 
             try {
+                const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
                 // 2. Отправляем два запроса одновременно, чтобы было быстрее
                 const [profileResponse, ordersResponse] = await Promise.all([
                     // Запрос на данные профиля
-                    fetch('https://creative-paws-shop-production.up.railway.app/api/profile', {
+                    fetch(`${apiUrl}/api/profile`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     }),
                     // Запрос на историю заказов
-                    fetch('https://creative-paws-shop-production.up.railway.app/api/orders', {
+                    fetch(`${apiUrl}/api/orders`, {
                         headers: { 'Authorization': `Bearer ${token}` }
                     })
                 ]);
@@ -58,7 +58,7 @@ const Profile = () => {
         };
 
         fetchProfileData();
-    }, [navigate]); // Зависимость от navigate (стандартная практика)
+    }, [navigate]); // Зависимость от navigate
 
     // Функция для выхода из аккаунта
     const handleLogout = () => {

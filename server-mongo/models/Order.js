@@ -57,5 +57,5 @@ const OrderSchema = new Schema({
     }
 });
 
-// Экспортируем модель под названием 'Order', чтобы использовать ее в других файлах (например, в /routes/orders.js).
+
 module.exports = mongoose.model('Order', OrderSchema);

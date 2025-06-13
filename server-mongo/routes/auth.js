@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Подключаем наш "чертеж" пользователя
+const User = require('../models/User'); 
 const bcrypt = require('bcryptjs'); // Для шифрования паролей
 const jwt = require('jsonwebtoken'); // Для создания "пропусков" (токенов)
 
-// === Маршрут для РЕГИСТРАЦИИ (адрес будет /api/auth/register) ===
+// === Маршрут для РЕГИСТРАЦИИ  ===
 router.post('/register', async (req, res) => {
   try {
     const { email, password } = req.body; // Получаем email и пароль из запроса
@@ -34,7 +34,7 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// === Маршрут для ВХОДА (адрес будет /api/auth/login) ===
+// === Маршрут для ВХОДА ===
 router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;

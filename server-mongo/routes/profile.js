@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth'); // Наш "охранник"
+const auth = require('../middleware/auth'); 
 const User = require('../models/User');
 
-// GET /api/profile
+
 // Этот маршрут защищен. Сначала сработает `auth`, и только потом код внутри.
 router.get('/', auth, async (req, res) => {
   try {

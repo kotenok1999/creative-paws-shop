@@ -1,7 +1,5 @@
-
-
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+
 
 // Middleware — это функция, которая выполняется перед основной логикой маршрута
 module.exports = function (req, res, next) {
@@ -15,7 +13,9 @@ module.exports = function (req, res, next) {
 
   // 3. Проверяем, настоящий ли это токен
   try {
+    
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
     // Если токен верный, мы добавляем информацию о пользователе в сам запрос
     req.user = decoded; // В `decoded` у нас { userId, isAdmin }
     next(); // Разрешаем идти дальше, к основной логике

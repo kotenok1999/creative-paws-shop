@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth'); // Наш "охранник"
+const auth = require('../middleware/auth');
 const Order = require('../models/Order');
 
-// POST /api/orders - Создать новый заказ
+//  Создать новый заказ
 router.post('/', auth, async (req, res) => {
     try {
         const { products, total } = req.body;
@@ -22,7 +22,7 @@ router.post('/', auth, async (req, res) => {
     }
 });
 
-// GET /api/orders - Получить все заказы ТЕКУЩЕГО пользователя
+//  Получить все заказы ТЕКУЩЕГО пользователя
 router.get('/', auth, async (req, res) => {
     try {
         const orders = await Order.find({ user: req.user.userId }).sort({ createdAt: -1 });

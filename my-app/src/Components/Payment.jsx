@@ -23,19 +23,19 @@ const Payment = () => {
             </div>
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Контейнер 1: Банковской картой */}
+              {/* Контейнер 1*/}
               <div className="bg-white rounded-lg shadow-md p-6 text-center">
                 <h3 className="text-xl font-semibold mb-2">Банковской картой</h3>
                 <p className="text-gray-600">Оплата с помощью Visa, Mastercard, Мир и других карт.</p>
               </div>
 
-              {/* Контейнер 2: Яндекс.Деньги */}
+              {/* Контейнер 2*/}
               <div className="bg-white rounded-lg shadow-md p-6 text-center">
                 <h3 className="text-xl font-semibold mb-2">Яндекс.Деньги</h3>
                 <p className="text-gray-600">Оплата через кошелек Яндекс.Деньги.</p>
               </div>
 
-              {/* Контейнер 3: Переводом */}
+              {/* Контейнер 3*/}
               <div className="bg-white rounded-lg shadow-md p-6 text-center">
                 <h3 className="text-xl font-semibold mb-2">Переводом</h3>
                 <p className="text-gray-600">Прямой банковский перевод.</p>

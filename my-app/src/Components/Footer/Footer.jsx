@@ -10,7 +10,7 @@ const Footer = () => {
 
       
     
-
+          {/* === nav === */}
       
       <div className='space-y-6'>
         
@@ -24,17 +24,17 @@ const Footer = () => {
           
         </ul>
       </div>
-
+      {/* === ССЫЛКИ НА СОЦ.СЕТИ === */}
       
       <div className='space-y-6 text-right'>
         
         <ul class="space-y-6">
-          <li><button onClick={() =>navigate('/')} class=" text-4xl text-darkbluegray hover:underline hover:text-darkbluegray">
+          <li><a  href="https://vk.com/club228670752" class=" text-4xl text-darkbluegray hover:underline hover:text-darkbluegray">
             ВКОНТАКТЕ
-          </button></li>
-         <li><button onClick={() =>navigate('/')} class=" text-4xl text-darkbluegray hover:underline hover:text-darkbluegray">
+          </a></li>
+         <li><a href="https://t.me/cretive_paws" class=" text-4xl text-darkbluegray hover:underline hover:text-darkbluegray">
             ТЕЛЕГРАМ
-          </button></li>
+          </a></li>
           
           
 

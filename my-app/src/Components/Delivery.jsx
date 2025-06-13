@@ -16,7 +16,7 @@ const Delivery = () => {
               <h2  onClick={() =>navigate('/payment')} className="border-b-2 border-wisteria pb-2 text-wisteria text-5xl font-bold hover:text-black hover:border-black">ОПЛАТА</h2>
             </div>
 
-            <div className="overflow-x-auto mt-8"> {/* Добавлено mt-8 для отступа */}
+            <div className="overflow-x-auto mt-8"> 
               <table className="min-w-full leading-normal">
                 <thead>
                   <tr>

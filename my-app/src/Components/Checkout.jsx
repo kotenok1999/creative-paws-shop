@@ -1,11 +1,10 @@
-// Файл: my-app/src/Components/Checkout.jsx - НОВЫЙ ФАЙЛ
-
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
+import { useCart } from '../context/CartContext';
+import toast from 'react-hot-toast'; 
 
-// Данные о доставке, которые мы возьмем из твоего Delivery.jsx
 const deliveryOptions = [
     { id: 1, name: 'Простое письмо', price: 149, description: 'Отправка Почтой России, приходит в почтовый ящик' },
     { id: 2, name: 'Заказным письмом с трек-кодом', price: 199, description: 'Отправка Почтой России, получение по паспорту' },
@@ -16,34 +15,35 @@ const deliveryOptions = [
 const Checkout = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const { clearCart } = useCart();
 
-    // Получаем данные о корзине, которые мы "пронесли" со страницы Cart
     const { cartItems, total: cartTotal } = location.state || { cartItems: [], total: 0 };
 
     const [selectedDelivery, setSelectedDelivery] = useState(deliveryOptions[0]);
     const [isPaid, setIsPaid] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     if (cartItems.length === 0) {
-        // Если кто-то зашел на эту страницу без товаров, отправляем его в корзину
         navigate('/cart');
         return null;
     }
     
-    // Считаем итоговую сумму с учетом доставки
     const finalTotal = cartTotal + selectedDelivery.price;
 
     const handlePlaceOrder = async () => {
         if (!isPaid) {
-            alert('Пожалуйста, подтвердите оплату, поставив галочку.');
+            toast.error('Пожалуйста, подтвердите оплату, поставив галочку.');
             return;
         }
 
         const token = localStorage.getItem('token');
         if (!token) {
-            alert('Пожалуйста, войдите в систему, чтобы завершить заказ.');
+            toast.error('Пожалуйста, войдите в систему, чтобы завершить заказ.');
             navigate('/login');
             return;
         }
+        
+        setIsSubmitting(true);
 
         const orderData = {
             products: cartItems.map(item => ({
@@ -52,12 +52,13 @@ const Checkout = () => {
                 quantity: item.quantity,
                 image: item.images[0]
             })),
-            total: finalTotal, // Отправляем итоговую сумму с доставкой
-            status: 'Оплачен' // Статус сразу "Оплачен", так как есть галочка
+            total: finalTotal,
+            status: 'Оплачен'
         };
 
         try {
-            const response = await fetch('https://creative-paws-shop-production.up.railway.app/api/orders', {
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+            const response = await fetch(`${apiUrl}/api/orders`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify(orderData)
@@ -65,12 +66,14 @@ const Checkout = () => {
 
             if (!response.ok) throw new Error('Не удалось создать заказ');
 
-            alert('Ваш заказ успешно оформлен! Спасибо!');
-            // Тут нужно очистить корзину, но мы сделаем это на странице корзины при уходе
+            toast.success('Ваш заказ успешно оформлен! Спасибо!');
+            clearCart();
             navigate('/profile');
 
         } catch (error) {
-            alert(`Ошибка: ${error.message}`);
+            toast.error(`Ошибка: ${error.message}`);
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -80,7 +83,6 @@ const Checkout = () => {
             <main className="container mx-auto max-w-4xl py-12 px-4">
                 <h1 className="text-4xl font-bold mb-8 text-center">Оформление заказа</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    {/* Левая колонка: Состав заказа */}
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <h2 className="text-2xl font-semibold mb-4 border-b pb-2">Состав заказа</h2>
                         <div className="space-y-4">
@@ -103,7 +105,6 @@ const Checkout = () => {
                         </div>
                     </div>
 
-                    {/* Правая колонка: Доставка и оплата */}
                     <div className="bg-white p-6 rounded-lg shadow-md">
                         <h2 className="text-2xl font-semibold mb-4 border-b pb-2">Доставка</h2>
                         <div className="space-y-3">
@@ -117,7 +118,6 @@ const Checkout = () => {
                                 </div>
                             ))}
                         </div>
-
                         <div className="border-t mt-6 pt-6">
                             <h2 className="text-2xl font-semibold mb-4">Итоговая сумма</h2>
                             <div className="space-y-2 text-lg">
@@ -126,17 +126,14 @@ const Checkout = () => {
                                 <div className="flex justify-between font-bold text-2xl mt-2 border-t pt-2"><span>Всего к оплате:</span> <span>{finalTotal} Р</span></div>
                             </div>
                         </div>
-
-                        {/* Наша волшебная галочка */}
                         <div className="mt-8">
                             <label className="flex items-center cursor-pointer">
                                 <input type="checkbox" checked={isPaid} onChange={() => setIsPaid(!isPaid)} className="h-5 w-5 rounded border-gray-300 text-wisteria focus:ring-purple-400" />
                                 <span className="ml-3 text-lg font-semibold">Я подтверждаю оплату</span>
                             </label>
                         </div>
-                        
-                        <button onClick={handlePlaceOrder} className="w-full mt-6 bg-darkbluegray text-white text-xl py-3 rounded-lg hover:bg-wisteria transition-colors disabled:bg-gray-400" disabled={!isPaid}>
-                            Завершить оформление
+                        <button onClick={handlePlaceOrder} className="w-full mt-6 bg-darkbluegray text-white text-xl py-3 rounded-lg hover:bg-wisteria transition-colors disabled:bg-gray-400" disabled={!isPaid || isSubmitting}>
+                            {isSubmitting ? 'Оформление...' : 'Завершить оформление'}
                         </button>
                     </div>
                 </div>

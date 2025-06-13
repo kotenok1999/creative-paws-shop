@@ -1,5 +1,3 @@
-// Файл: src/data/products.js - ПОЛНАЯ ВЕРСИЯ СО ВСЕМИ ТОВАРАМИ
-
 // Импорты для Стикеров
 import stikerOne1 from '../Components/img/TovarStikers/One/one.png';
 import stikerOne2 from '../Components/img/TovarStikers/One/onee.png';
@@ -12,7 +10,6 @@ import stikerThree1 from '../Components/img/TovarStikers/Three/three.png';
 import stikerThree2 from '../Components/img/TovarStikers/Three/threee.png';
 import stikerThree3 from '../Components/img/TovarStikers/Three/threeee.png';
 
-// Новые импорты для стикеров
 import stikerFour1 from '../Components/img/TovarStikers/Four/four.png';
 import stikerFour2 from '../Components/img/TovarStikers/Four/fourr.png';
 
@@ -66,9 +63,10 @@ import sertif2000 from '../Components/img/TovarSertif/4.png';
 
 
 export const products = [
-  // =====================
+  
+
   // === СТИКЕРЫ ===
-  // =====================
+
   {
     id: 'black-stiker-001',
     category: 'stikers',
@@ -93,7 +91,7 @@ export const products = [
     images: [stikerThree1, stikerThree2, stikerThree3],
     description: `Виниловые стикеры с авторским дизайном, влагостойкие.\nЕсли не получилось приклеить с первого раза - не беда, их легко можно переклеить!\nНе оставляют следов, но советуем предварительно протереть поверхность перед наклеиванием.`
   },
-  // === НОВЫЕ ТОВАРЫ-СТИКЕРЫ ===
+  
   {
     id: 'stiker-sikomole-004',
     category: 'stikers',
@@ -127,9 +125,9 @@ export const products = [
     description: `Количество стикеров: 50 шт.\n\nВиниловые стикеры с авторским дизайном, влагостойкие.\nЕсли не получилось приклеить с первого раза - не беда, их легко можно переклеить!\nНе оставляют следов, но советуем предварительно протереть поверхность перед наклеиванием.`
   },
 
-  // =====================
+  
   // === СТИКЕРБУКИ ===
-  // =====================
+  
   {
     id: 'pink-stikerbook-001',
     category: 'stikerbook',
@@ -155,9 +153,9 @@ export const products = [
     description: `Стикербук с наклейками в эстетичном стиле.\nВ стикербуке 20 матовых листов 21 см х 15 см, более 200 наклеек для самостоятельного вырезания.\nМаленькие наклейки можно объединить в крупные и сделать большую наклейку.\nВысокое качество и яркость печати.`
   },
   
-  // =====================
+  
   // === МУДПАКИ ===
-  // =====================
+  
   {
     id: 'rockstar-moodpack-001',
     category: 'moodpack',
@@ -191,9 +189,9 @@ export const products = [
     description: `Погрузись в атмосферу творчества с нашими мудпаками!\nКаждый набор - это тщательно подобранная коллекция эстетичных предметов: карточек, вырезок, наклеек и декоративной бумаги. Идеально подходит для оформления ежедневников, создания коллажей или просто для вдохновения.`
   },
   
-  // =====================
+  
   // === СЕРТИФИКАТЫ ===
-  // =====================
+ 
   {
     id: 'sertif-500',
     category: 'sertif',
