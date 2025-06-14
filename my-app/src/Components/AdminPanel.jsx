@@ -19,9 +19,12 @@ const AdminPanel = () => {
             return;
         }
         try {
+            
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+
             const [ordersRes, feedbacksRes] = await Promise.all([
-                fetch('http://localhost:5001/api/admin/orders', { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch('http://localhost:5001/api/admin/feedback', { headers: { 'Authorization': `Bearer ${token}` } })
+                fetch(`${apiUrl}/api/admin/orders`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${apiUrl}/api/admin/feedback`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
             if (!ordersRes.ok || !feedbacksRes.ok) throw new Error('Доступ запрещен');
             const ordersData = await ordersRes.json();
@@ -42,14 +45,18 @@ const AdminPanel = () => {
     const handleStatusChange = async (orderId, newStatus) => {
         const token = localStorage.getItem('token');
         try {
-            await fetch(`http://localhost:5001/api/admin/orders/${orderId}`, {
+            
+            const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5001';
+
+            await fetch(`${apiUrl}/api/admin/orders/${orderId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
                 body: JSON.stringify({ status: newStatus })
             });
             fetchData();
         } catch (error) {
-            alert('Не удалось изменить статус');
+            // Можно добавить уведомление для админа
+            console.error('Не удалось изменить статус', error);
         }
     };
 
@@ -77,7 +84,6 @@ const AdminPanel = () => {
                 </div>
 
                 {/* === менюшка заказов === */}
-                
                 {activeTab === 'orders' && (
                     <div className="space-y-6">
                         {orders.length > 0 ? orders.map(order => (
@@ -116,7 +122,6 @@ const AdminPanel = () => {
                 )}
 
                 {/* === менюшка обращений === */}
-
                 {activeTab === 'feedbacks' && (
                     <div className="space-y-6">
                         {feedbacks.length > 0 ? (
@@ -124,7 +129,6 @@ const AdminPanel = () => {
                                 <div key={fb._id} className="bg-white p-6 rounded-lg shadow-md">
                                     <div className="flex justify-between items-center mb-4 pb-2 border-b">
                                         <div>
-                                            
                                             <p className="font-bold text-lg">{fb.name} <span className="font-normal text-gray-500 text-base">{fb.email}</span></p>
                                             <p className="text-sm text-gray-500">Отправлено: {new Date(fb.createdAt).toLocaleString()}</p>
                                         </div>
